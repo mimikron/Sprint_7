@@ -40,13 +40,12 @@ public class CourierMethods {
         given().log().all().delete("/" + courierId);
     }
 
-    @Step("Удаление курьера")
+    @Step("Удаление курьера по id")
     public Response deleteCourier(String courierId) {
-        return given().log().all().delete(courierId);
-    }
-
-    @Step("Удаление курьера")
-    public Response deleteCourier(Integer courierId) {
-        return given().log().all().delete(String.valueOf(courierId));
+        if(courierId.equals("")) {
+            return given().log().all().delete();
+        } else {
+            return given().log().all().delete(courierId);
+        }
     }
 }

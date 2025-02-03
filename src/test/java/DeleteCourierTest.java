@@ -46,9 +46,10 @@ public class DeleteCourierTest {
                 .and()
                 .body("ok", is(true));
 
-        courierMethods.deleteCourier((Integer) courierMethods.loginCourier()
+        courierMethods.deleteCourier(courierMethods.loginCourier()
                         .then().log().all()
-                        .extract().path("id")).then().log().all()
+                        .extract().path("id").toString()).then().log().all()
+                .assertThat()
                 .statusCode(HttpURLConnection.HTTP_OK)
                 .and()
                 .body("ok", is(true));
