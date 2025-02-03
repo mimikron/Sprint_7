@@ -42,7 +42,7 @@ public class CourierMethods {
 
     @Step("Удаление курьера по id")
     public Response deleteCourier(String courierId) {
-        if(courierId.equals("")) {
+        if(courierId.isEmpty()) {
             return given().log().all().delete();
         } else {
             return given().log().all().delete(courierId);
