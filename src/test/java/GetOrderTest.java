@@ -25,6 +25,7 @@ public class GetOrderTest {
                 .then().log().all()
                 .assertThat()
                 .statusCode(HttpURLConnection.HTTP_OK)
+                .and()
                 .body("orders", notNullValue());
     }
 }
