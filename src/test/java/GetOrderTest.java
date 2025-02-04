@@ -25,7 +25,7 @@ public class GetOrderTest {
                 .assertThat()
                 .statusCode(HttpURLConnection.HTTP_OK)
                 .and()
-                .body("orders", not(emptyOrNullString()));
+                .body("orders", allOf(not(emptyArray()), notNullValue()));
 
     }
 }
