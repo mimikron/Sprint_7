@@ -9,7 +9,7 @@ import pojo.Order;
 
 import java.net.HttpURLConnection;
 
-import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 
 @RunWith(Parameterized.class)
 
@@ -46,7 +46,7 @@ public class CreateOrderTest {
                 .then().log().all()
                 .assertThat()
                 .statusCode(HttpURLConnection.HTTP_CREATED)
-                .body("track", notNullValue());
+                .body("track", not(emptyOrNullString()));
     }
 
 }

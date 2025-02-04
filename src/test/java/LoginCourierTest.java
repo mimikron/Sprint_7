@@ -10,7 +10,8 @@ import org.junit.Test;
 import java.net.HttpURLConnection;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.emptyOrNullString;
+import static org.hamcrest.Matchers.not;
 public class LoginCourierTest {
 
     Courier courier = new Courier("cadzua", "123456", "misima");
@@ -31,7 +32,7 @@ public class LoginCourierTest {
                 .then().log().all()
                 .assertThat()
                 .statusCode(HttpURLConnection.HTTP_OK)
-                .body("id", notNullValue());
+                .body("id", not(emptyOrNullString()));
     }
 
     @Test
@@ -91,7 +92,7 @@ public class LoginCourierTest {
     public void loginCourierWithWrongPassword() {
         courierMethods.setCourier(courier);
         courierMethods.createCourier();
-        courierMethods.setCourier(new pojo.Courier("Admin_Login123", "123"));
+        courierMethods.setCourier(new pojo.Courier("cadzua", "123"));
         courierMethods.loginCourier()
                 .then().log().all()
                 .assertThat()
