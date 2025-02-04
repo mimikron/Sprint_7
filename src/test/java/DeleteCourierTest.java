@@ -5,7 +5,6 @@ import io.restassured.RestAssured;
 import org.junit.Before;
 import org.junit.Test;
 
-import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 
@@ -19,7 +18,6 @@ public class DeleteCourierTest {
     @Before
     @Step("Предусловия для создания теста")
     public void setUp() {
-        RestAssured.baseURI = "https://qa-scooter.praktikum-services.ru";
         RestAssured.basePath = "/api/v1/courier/";
     }
 
@@ -27,8 +25,7 @@ public class DeleteCourierTest {
     @DisplayName("Неуспешный запрос удаления курьера")
     @Description("Тест неуспешный запрос удаления курьера")
     public void deleteCourierFail(){
-        given().log().all()
-                .delete("00000")
+        courierMethods.deleteCourier("00000")
                 .then().log().all()
                 .statusCode(HttpURLConnection.HTTP_NOT_FOUND)
                 .and()
@@ -59,7 +56,6 @@ public class DeleteCourierTest {
     @DisplayName("Запрос без id курьера")
     @Description("Тест запрос без id  курьера")
     public void deleteCourierWithoutId(){
-        given().log().all().delete();
         courierMethods.deleteCourier("").then().log().all()
                 .statusCode(HttpURLConnection.HTTP_NOT_FOUND)
                 .and()

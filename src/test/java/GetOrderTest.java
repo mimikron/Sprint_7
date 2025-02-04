@@ -6,14 +6,13 @@ import org.junit.Test;
 
 import java.net.HttpURLConnection;
 
-import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 
 public class GetOrderTest {
     OrderMethods orderMethods = new OrderMethods();
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = "https://qa-scooter.praktikum-services.ru";
         RestAssured.basePath = "/api/v1/orders";
     }
 
@@ -26,6 +25,7 @@ public class GetOrderTest {
                 .assertThat()
                 .statusCode(HttpURLConnection.HTTP_OK)
                 .and()
-                .body("orders", notNullValue());
+                .body("orders", not(emptyOrNullString()));
+
     }
 }

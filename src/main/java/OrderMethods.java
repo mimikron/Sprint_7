@@ -1,11 +1,11 @@
+import client.Client;
 import io.qameta.allure.Step;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import pojo.Order;
 
 import static io.restassured.RestAssured.given;
 
-public class OrderMethods {
+public class OrderMethods extends Client {
 
     private Order order;
 
@@ -16,7 +16,7 @@ public class OrderMethods {
     @Step("Создать заказ")
     public Response createOrder() {
         return given().log().all()
-                .contentType(ContentType.JSON)
+                .spec(getSpec())
                 .body(order)
                 .when()
                 .post();
@@ -24,6 +24,6 @@ public class OrderMethods {
 
     @Step("Получить список заказов")
     public Response getOrder() {
-        return given().log().all().get();
+        return given().log().all().spec(getSpec()).get();
     }
 }
